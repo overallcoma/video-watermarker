@@ -83,8 +83,9 @@ def workflow():
         for video in video_list:
             output_file = os.path.join(student_output_folder, os.path.basename(video))
             print("Generating " + os.path.basename(video) + " for " + student_name)
-            subprocess.run([ffmpeg, "-loglevel", "warning", "-i", video, "-i", watermark_path, "-filter_complex",
-                            "overlay=x=(main_w-overlay_w)/2:y=(main_h-overlay_h)/2", output_file, "-y"])
+            subprocess.run([ffmpeg, "-loglevel", "warning", "-i", video, "-i", watermark_path, "-preset", "veryfast",
+                            "-filter_complex", "overlay=x=(main_w-overlay_w)/2:y=(main_h-overlay_h)/2", output_file,
+                            "-y"])
         os.remove(watermark_path)
         print(student_name + " is complete")
 
